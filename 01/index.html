@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>First step</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <h2>Урок 1</h2>
+	<div id="app">
+		<h1>
+		  {{ message }}
+		</h1>
+	</div>
+
+  <h2>Урок 2</h2>
+	<div id="app-2">
+	  <span v-bind:title="message">
+	    Наведи на меня курсор на пару секунд,
+	    чтобы увидеть динамически связанное значение title!
+	  </span>
+	</div>
+
+  <h2>Урок 3</h2>
+  Введи в консоли app3.seen = false
+	<div id="app-3">
+	  <span v-if="seen">Сейчас меня видно</span>
+	</div>
+
+  <h2>Урок 4. Циклы</h2>
+  Введи в консоли app4.todos.push({ text: 'Продать' })
+  <div id="app-4">
+    <ol>
+      <li v-for="todo in todos">
+        {{ todo.text }}
+      </li>
+    </ol>
+  </div>
+
+  <h2>Урок 5. События</h2>
+  <div id="app-5">
+    <p>{{ message }}</p>
+    <button v-on:click=reverseMessage>Rotate message</button><br>
+    <button @click=restoreMessage>Restore</button>
+  </div>
+
+  <h2>Урок 6. Связь форм и состояний</h2>
+  <div id="app-6">
+    <p>{{ message }}</p>
+    <input v-model="message">
+  </div>
+
+  <h2>Урок 7. Компоненты</h2>
+  Простой компонент:
+  <div id="app-7">
+    <ol>
+      <todo-item></todo-item>
+      <todo-item></todo-item>
+      <todo-item></todo-item>
+    </ol>
+  </div>
+
+  Компонент с параметрами:
+   <div id="app-8">
+     <ol>
+      <shop-item
+        v-for="item in shopList"
+        v-bind:shop="item"
+        v-bind:key="item.id"
+      ></shop-item>
+    </ol>
+     {{ shopList }}
+   </div>
+
+	<script type="text/javascript">
+
+		var app = new Vue({
+		  el: '#app',
+		  data: {
+		    message: 'Привет, Vue!'
+		  }
+		})
+
+		var app2 = new Vue({
+		  el: '#app-2',
+		  data: {
+		    message: 'Вы загрузили эту страницу: ' + new Date().toLocaleString()
+		  }
+		})
+
+		var app3 = new Vue({
+		  el: '#app-3',
+		  data: {
+		    seen: true
+		  }
+		})
+
+    var app4 = new Vue({
+      el: '#app-4',
+      data: {
+        todos: [
+          { text: 'Почитать' },
+          { text: 'Подумать' },
+          { text: 'Сделать' },
+        ]
+      }
+    })
+
+    var app5 = new Vue({
+      el: '#app-5',
+      data: {
+        message: 'Message for lesson #5'
+      },
+      methods: {
+        restoreMessage: function () {
+          this.message = 'Message for lesson #5'
+        },
+        reverseMessage: function () {
+          this.message = this.message.split('').reverse().join('')
+        },
+      }
+    })
+
+    var app6 = new Vue({
+      el: '#app-6',
+      data: {
+        message: 'Привет, Реакт!'
+      }
+    })
+
+    // компоненты
+
+    Vue.component('todo-item', {
+      template: '<li>Это одна задача в списке</li>'
+    })
+
+    var app7 = new Vue({
+      el: '#app-7',
+      data: {
+        message: 'Привет, Компонент!'
+      }
+    })
+
+    Vue.component('shop-item', {
+      props: ['shop'],
+      template: '<li>{{ shop.text }}</li>'
+    })
+
+    var app8 = new Vue({
+      el: '#app-8',
+      data: {
+        shopList: [
+          { id: 0, text: 'Bread' },
+          { id: 1, text: 'Milk' },
+          { id: 2, text: 'Eggs' },
+          { id: 3, text: 'Butter' },
+        ]
+      }
+    })
+
+	</script>
+</body>
+</html>
