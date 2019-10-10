@@ -8,10 +8,12 @@
 
   <div id="app" class="ui container">
     <h1>GitHub Profiles</h1>
-    <github-user-card username="sdras"></github-user-card>
-    <github-user-card username="daylerees"></github-user-card>
-    <github-user-card username="JeffreyWay"></github-user-card>
-    <github-user-card username="yyx990803"></github-user-card>
+    <div class="ui cards">
+      <github-user-card
+        v-for="user in usernames"
+        :username="user"
+      ></github-user-card>
+    </div>
   </div>
 
     <!-- Template for GitHub card -->
@@ -66,7 +68,10 @@
     })
 
     new Vue({
-      el: '#app'
+      el: '#app',
+      data: {
+        usernames: ['sdras', 'daylerees', 'JeffreyWay', 'yyx990803']
+      }
     })
   </script>
 </body>
