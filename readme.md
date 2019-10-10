@@ -146,3 +146,14 @@ https://ru.vuejs.org/v2/api/#Свойства-экземпляра
 ## $PRACTISE
 
 ### GitHub User Profile Component
+
+Образец
+https://codepen.io/ronaklalwanii/pen/BOGEZj
+
+Шаблон страницы разбивают на переиспользуемые в дальнейшем компоненты.
+
+Подключаем CSS-фреймворк:
+https://semantic-ui.com/introduction/getting-started.html
+
+Возьмем карточку:
+https://semantic-ui.com/views/card.html
