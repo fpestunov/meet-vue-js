@@ -157,3 +157,12 @@ https://semantic-ui.com/introduction/getting-started.html
 
 Возьмем карточку:
 https://semantic-ui.com/views/card.html
+
+Приступим...
+
+1. Создадим компонент `Vue.component('github-user-card', {...})`;
+2. Сделаем шаблон `<script type="text/x-template" id="github-user-card-template">`;
+3. Подключаем вывод шаблона `<github-user-card username="UserName"></github-user-card>`;
+
+Работает!
+
