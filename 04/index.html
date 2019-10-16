@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>First step</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <h2>Пример 1</h2>
+  <div id="app">
+    <p>Изначальное сообщение: «{{ message }}»</p>
+    <p>Сообщение задом наперёд: «{{ reversedMessage }}»</p>
+  </div>
+  <code>
+    <pre>
+      console.log(vm.reversedMessage) // => '!olleH'
+      vm.message = 'Bye'
+      console.log(vm.reversedMessage) // => 'eyB'
+    </pre>
+  </code>
+
+  <h2>Пример 2</h2>
+  <div id="app2">
+    <p>Используем метод: «{{ methodNow() }}»</p>
+    <p>Используем вычисляемое свойство: «{{ computedNow }}»</p>
+  </div>
+  Будет разное время
+  <code>
+    <pre>
+      console.log(vm.methodNow()) // => 1571225835855
+      console.log(vm.computedNow) // => 1571225835800
+    </pre>
+  </code>
+
+  <h2>Пример 3</h2>
+  <div id="app3">
+    {{ fullName }}
+  </div>
+
+  <script type="text/javascript">
+
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello!'
+      },
+      computed: {
+        // геттер вычисляемого значения
+        reversedMessage: function () {
+          // `this` указывает на экземпляр vm
+          return this.message.split('').reverse().join('')
+        }
+      }
+    })
+
+    var vm2 = new Vue({
+      el: '#app2',
+      computed: {
+        computedNow: function () {
+          return Date.now()
+        }
+      },
+      methods: {
+        methodNow : function () {
+          return Date.now()
+        }
+      }
+    })
+
+    var vm3 = new Vue({
+      el: '#app3',
+      data: {
+        firstName: 'John',
+        lastName: 'Doe'
+      },
+      computed: {
+        fullName: function () {
+          return this.firstName + ' ' + this.lastName
+        }
+      }
+    })
+
+    // Избыточный код
+/*    var vm3 = new Vue({
+      el: '#app3',
+      data: {
+        firstName: 'John',
+        lastName: 'Doe',
+        fullName: 'John Doe'
+      },
+      watch: {
+        firstName: function (val) {
+          this.fullName = val + ' ' + this.lastName
+        },
+        lastName: function (val) {
+          this.fullName = this.firstName + ' ' + val
+        }
+      }
+    })
+*/
+  </script>
+</body>
+</html>
