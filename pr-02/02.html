@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Context Menu</title>
+  <style>
+    .pop-out-quick-enter-active,
+    .pop-out-quick-leave-active {
+        transition: all 0.4s;
+    }
+     .pop-out-quick-enter,
+    .pop-out-quick-leave-active {
+        opacity: 0;
+        transform: translateY(-7px);
+    }
+  </style>
+</head>
+
+<!-- flex flex-col items-center p-8 -->
+<body>
+  <div id="app" class="flex flex-col items-center p-8">
+    <h1 class="text-2xl font-bold mb-8">Context Menu</h1>
+    <div>
+      <div class="bg-gray-200 w-64 h-64 flex items-center justify-center">
+        <context-menu classes="bg-black text-white">
+          <template v-slot:trigger>
+            <button>...</button>
+          </template>
+          <li><a href="#" class="pl-2 pr-8 leading-loose text-xs block hover:bg-gray-800">Edit</a></li>
+          <li><a href="#" class="pl-2 pr-8 leading-loose text-xs block hover:bg-gray-800">Delete</a></li>
+          <li><a href="#" class="pl-2 pr-8 leading-loose text-xs block hover:bg-gray-800">Report</a></li>
+        </context-menu>
+      </div>
+    </div>
+    <hr>
+    <div>
+    <context-menu classes="bg-green-900 text-gray-100">
+      <template v-slot:trigger>
+        <button>Click me!</button>
+      </template>
+      <li><a href="#" class="pl-2 pr-8 leading-loose text-xs block hover:bg-gray-800">Edit</a></li>
+      <li><a href="#" class="pl-2 pr-8 leading-loose text-xs block hover:bg-gray-800">Delete</a></li>
+      <li><a href="#" class="pl-2 pr-8 leading-loose text-xs block hover:bg-gray-800">Report</a></li>
+    </context-menu>
+    </div>
+
+  </div>
+
+
+  <!-- Template for Context Menu -->
+  <script type="text/x-template" id="context-menu-template">
+    <div class="dropdown">
+      <div @click="isOpen = !isOpen">
+        <slot name="trigger"></slot>
+      </div>
+
+      <transition name="pop-out-quick"">
+      <ul v-show="isOpen" class="absolute mt-2 py-2 rounded shadow z-10" :class="classes">
+        <slot></slot>
+      </ul>
+      </transition>
+    </div>
+  </script>
+
+  <script>
+
+      Vue.component('context-menu', {
+        template: '#context-menu-template',
+
+        props: ['classes'],
+
+        data() {
+          return {
+            isOpen: false
+          }
+        },
+
+        watch: {
+          isOpen(isOpen) {
+            if (isOpen) {
+              document.addEventListener('click', this.closeIfClickedOutside)
+            }
+          }
+        },
+
+        methods: {
+          closeIfClickedOutside(event) {
+            if (! event.target.closest('.dropdown')) {
+              // alert('hi there')
+              this.isOpen = false
+            }
+          }
+      }
+    })
+
+  var app = new Vue({
+    el: '#app',
+
+    methods: {
+    }
+  })
+
+  </script>
+</body>
+
+</html>

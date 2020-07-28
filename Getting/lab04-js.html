@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS List</title>
+
+  <!-- css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+
+  <!-- js -->
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  <!-- our template -->
+  <section id="app" class="section container">
+
+    <ul class="user-list"></ul>
+
+  </section>
+
+  <!-- our javascript -->
+  <script>
+    const users = [
+      {
+        name: 'J Jefferson',
+        username: 'jeffrey',
+        avatar: 'jefferson.jpg'
+      },
+      {
+        name: 'John Kennedy',
+        username: 'john',
+        avatar: 'Kennedy.jpg'
+      },
+      {
+        name: 'Abraham Lincoln',
+        username: 'linkoln',
+        avatar: 'Lincoln.jpg'
+      }
+    ];
+    // plain javascript ===========================
+    const userList = document.querySelector('.user-list');
+    // users.forEach(function(user) {
+    //   const userItem = document.createElement('li');
+    //   userItem.innerHTML = `
+    //     <img src="${user.avatar}" width="200" height="200"><br>
+    //     Name: ${user.name}<br>
+    //     UserName: ${user.username}<hr>
+    //   `;
+    //   userList.appendChild(userItem);
+    // });
+    // REFACTOR
+    users.forEach(injectUserIntoList);
+
+    function injectUserIntoList(user) {
+      const userItem = document.createElement('li');
+      userItem.innerHTML = `
+        <img src="${user.avatar}" width="200" height="200"><br>
+        Name: ${user.name}<br>
+        UserName: ${user.username}<hr>
+      `;
+      userList.appendChild(userItem);
+    }
+
+    // vue =======================================================
+    const app = new Vue({
+      el: '#app'
+    });
+  </script>
+</body>
+</html>

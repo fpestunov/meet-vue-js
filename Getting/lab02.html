@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hello World</title>
+
+  <!-- css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+
+  <!-- js -->
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+
+  <button id="b1">Vanila JS</button>
+
+  <section id="app" class="section container">
+    <h1 class="title">{{ myVarOne }}</h1>
+    <p>{{ myVarTwo }}</p>
+    <a class="button" v-on:click="notificate">Notificate</a>
+  </section>
+
+  <script>
+    function celebrate() {
+      alert('celebrating');
+    }
+    const btn = document.getElementById('b1');
+    btn.addEventListener("click", celebrate, false);
+  </script>
+
+  <script>
+    const app = new Vue({
+      el: '#app',
+
+      data: {
+        myVarOne: 'text 1',
+        myVarTwo: 'text 2'
+      },
+
+      methods: {
+        notificate: function () {
+          alert('Hey!!!')
+          alert(`${this.myVarTwo} is Celebrating!`)
+        }
+      }
+    })
+
+  </script>
+</body>
+</html>

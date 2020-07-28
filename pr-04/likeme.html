@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Like me please...</title>
+  <script src="https://unpkg.com/vue"></script>
+  <style>
+    .fill-current {fill:currentColor;}
+    .text-counter {font-weight:700;font-size:1.25rem;}
+    .text-gray {color:#ccc;}
+    .text-blue {color:#328af1;}
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <h2>Расскажите что вы любите...</h2>
+    <p v-on:click="addApple">{{ apple }} ({{ applePr }}%) Яблоки</p>
+    <p v-on:click="addBanan">{{ banan }} ({{ bananPr }}%) Бананы</p>
+    <p v-on:click="addOrange">{{ orange }} ({{ orangePr }}%) Апельсины</p>
+    <p>{{ total }} Голосов</p>
+
+    <h2>Like me please...</h2>
+    <svg v-on:click="likeMe" xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 14 13" class="fill-current" :class="isLiked ? 'text-blue' : 'text-gray'">
+      <path d="M13.59 1.778c-.453-.864-3.295-3.755-6.59.431C3.54-1.977.862.914.41 1.778c-.825 1.596-.33 4.014.823 5.18L7.001 13l5.767-6.043c1.152-1.165 1.647-3.582.823-5.18z">
+        <title>{{ isLiked ? 'Unlike this reply?' : 'Like this reply.' }}</title>
+      </path>
+    </svg>
+    <span class="text-counter" :class="isLiked ? 'text-blue' : 'text-gray'">{{ (counter>0) ? counter : '' }}</span>
+  </div>
+
+  <script>
+  const app = new Vue({
+    el: '#app',
+
+    data: {
+      total: 0,
+      apple: 0,
+      banan: 0,
+      orange: 0,
+      applePr: 0,
+      bananPr: 0,
+      orangePr: 0,
+      counter: 2,
+      isLiked: false
+    },
+
+    methods: {
+      likeMe: function() {
+        if (this.isLiked) {
+          this.counter--;
+        } else {
+          this.counter++;
+        }
+        this.isLiked = ! this.isLiked
+      },
+      addApple: function() {
+        this.apple++
+        this.total++
+        this.countPercent()
+      },
+      addBanan: function() {
+        this.banan++
+        this.total++
+        this.countPercent()
+      },
+      addOrange: function() {
+        this.orange++
+        this.total++
+        this.countPercent()
+      },
+      countPercent: function() {
+        this.applePr = Math.round(100 * this.apple / this.total)
+        this.bananPr = Math.round(100 * this.banan / this.total)
+        this.orangePr = 100 - this.applePr - this.bananPr;
+      }
+    }
+  })
+
+  </script>
+</body>
+
+</html>

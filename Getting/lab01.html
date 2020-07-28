@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hello World</title>
+
+  <!-- css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+
+  <!-- js -->
+  <script src="https://unpkg.com/jquery"></script>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+
+  <!-- plain javascript -->
+  <section class="section container">
+    <h1 class="title">My Text Goes Here!</h1>
+    <input type="text" class="input">
+  </section>
+
+  <!-- vue -->
+  <section id="app" class="section container">
+    <h1 class="title">My name is {{ name }} and my message {{ message }}</h1>
+    <input type="text" class="input" v-model="name">
+    <input type="text" class="input" v-model="message">
+  </section>
+
+  <!-- our javascript -->
+  <script>
+
+    // 1. Vanila Javascript
+
+    // const heading = document.querySelector('h1')
+    // const input = document.querySelector('input')
+
+    // input.addEventListener('keyup', (e) => {
+    //   const text = e.target.value
+    //   heading.innerText = text
+    // })
+
+    // 2. JQuery
+
+    $('input').on('keyup', (e) => $('h1').text(e.target.value))
+
+    // 3. Vue.js
+
+    const app = new Vue({
+      el: '#app',
+      data: {
+        name: 'Fred',
+        message: 'Hello everybody!'
+      }
+    })
+
+  </script>
+</body>
+</html>
